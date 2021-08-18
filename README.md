@@ -1,3 +1,5 @@
+Jiu Jitsu Journal App to track progress, keep detailed notes on technique, build game plans, and upload videos
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
