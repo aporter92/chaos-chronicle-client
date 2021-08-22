@@ -7,7 +7,7 @@ export default class Footer extends React.Component {
         <AppBar id = "footer" position="static" style ={{background: 'inherit'}}>
           <Container maxWidth="md">
             <Toolbar>
-              <Typography variant="body1" style={{color: 'black', flex: 1, justifyContent: "center", alignItems: 'center'}}>
+              <Typography variant="body1" style={{color: 'white', flex: 1, justifyContent: "center", alignItems: 'center'}}>
                 &copy; 2019 Anne Porter
               </Typography>
             </Toolbar>

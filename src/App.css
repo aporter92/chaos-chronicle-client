@@ -1,10 +1,38 @@
 .App {
   text-align: center;
+  background-color: #0B0C10;
+  height: 100%;
+  min-height: 100vh;
+  color: white;
+  background-attachment: fixed !important;
+
 }
 
 #footer { 
   position: absolute;
   bottom: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: black;
+  
+}
+.navbarguy{
+  background-color: #0B0C10;
+  width: 100%;
+  /* float: left;
+  border: 0; */
+  /* padding: 0;
+  margin: 0 ; */
+  margin: 0 -20rem;
+  padding: 0.25rem 20rem;
+}
+
+#signupbutton {
+  background-color: #66FCF1;
+}
+#loginbutton {
+  background-color: #66FCF1;
+}
+#logoutbutton {
+  position: absolute;
+  right: -30rem;
+  background-color: white;
 }
