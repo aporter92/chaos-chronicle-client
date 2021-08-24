@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import {Button} from '@material-ui/core';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import NoteCreate from './components/NoteCreate';
 class App extends React.Component {
   constructor(props: any) {
     super(props);
@@ -13,12 +13,6 @@ class App extends React.Component {
       sessionToken: undefined
     }
   }
-
-  
-  //   clearSession () {
-  //   localStorage.clear();
-  //   this.setState({sessionToken: undefined});
-  // };
 
   render() {
   return (
@@ -28,6 +22,7 @@ class App extends React.Component {
         <Navbar />
         <Login />
         <Footer />
+        <NoteCreate />
       
       </div>
     </div>
