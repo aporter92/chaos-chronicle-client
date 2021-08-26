@@ -9,11 +9,6 @@ export default class Login extends React.Component <any, any> {
             sessionToken: localStorage.getItem('token')
         }
     }
-    
-
-    // token () {
-    //   localStorage.getItem('newToken')
-    // }
 
     async loginHandler(e: any) {
         e.preventDefault();
@@ -81,14 +76,14 @@ export default class Login extends React.Component <any, any> {
         .then(response => response.json())
         .then(json => {
             alert(json.message)
-            this.props.updateLocalStorage(json.token)
+            localStorage.setItem('token', json.token);
         })
         .catch(err => console.log(err))
     }
 
     render() {
         return(
-            <div>
+            <div id = "registerlogin">
                 {this.state.signingUp ? (
           <div>
             <form

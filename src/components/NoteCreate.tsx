@@ -1,56 +1,75 @@
 import React from 'react';
 import {TextField, Grid, Typography, Button} from '@material-ui/core';
 type acceptedInputs = {
-    sessionToken?: string
+    sessionToken: any, // come back to this - any needs to be more specific
+    date: string,
+    instructor: string,
+    technique: string,
+    notes: string,
 }
-
-export default class NoteCreate extends React.Component <acceptedInputs, any>{
+export default class NoteCreate extends React.Component <{},acceptedInputs>{
     constructor(props: any) {
         super(props)
         this.state = {
-            sessionToken: localStorage.getItem('token'),
+           sessionToken: localStorage.getItem('token'),
             date: "",
             instructor: "",
             technique: "",
-            notes: ""
+            notes: "", 
         }
+
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleInstructorChange = this.handleInstructorChange.bind(this);
+        this.handleTechniqueChange = this.handleTechniqueChange.bind(this);
+        this.handleNotesChange = this.handleNotesChange.bind(this);
     }
 
-    handleDateChange(e: any) {
-        this.setState({date: e.target.value})
+    handleDateChange(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            date: e.target.value
+        })
+        console.log(this.state.date)
     }
-    handleInstructorChange(e: any) {
-        this.setState({instructor: e.target.value})
+    handleInstructorChange(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            instructor: e.target.value
+        })
+        console.log(this.state.instructor)
     }
-    handleTechniqueChange(e: any) {
-        this.setState({technique: e.target.value})
+    handleTechniqueChange(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            technique: e.target.value
+        })
+        console.log(this.state.technique)
     }
-    handleNotesChange(e: any) {
-        this.setState({notes: e.target.value})
+    handleNotesChange(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            notes: e.target.value
+        })
+        console.log(this.state.notes)
     }
 
-    async NoteHandler(e: any) {
+    NoteHandler = (e: any) => {
         e.preventDefault();
-        const date = e.target.value;
-        const instructor= e.target.value;
-        const technique = e.target.value;
-        const notes= e.target.value;
-        let reqBody = 
-        {
-           date: date,
-           instructor: instructor,
-           technique: technique,
-           notes: notes
-        } 
-        
-        let url = 
-            "http://localhost:3000/notes/create" 
-        await fetch(url, {
+        const date = this.state.date;
+        const instructor= this.state.instructor
+        const technique =this.state.technique
+        const notes= this.state.notes
+        let url = "http://localhost:3000/notes/create" 
+        fetch(url, {
             method: "POST",
-            body: JSON.stringify(reqBody),
+            body: JSON.stringify({
+                notes: {
+                    date: date,
+                    instructor:instructor,
+                    technique: technique,
+                    notes: notes
+                }
+            }),
             headers: new Headers({
                 "Content-Type": "application/json",
-                Authorization: this.state.sessionToken,
+                Authorization: this.state.sessionToken
+                
             })
         })
         .then((res) => res.json())
@@ -59,21 +78,19 @@ export default class NoteCreate extends React.Component <acceptedInputs, any>{
         )
         .catch((err) => console.log(err));
     }
-    
-
     render() {
         return(
+            <div className = "newDiv">
             <form onSubmit={this.NoteHandler}>
             <div className = "notesform" text-align="center">
             <Typography variant="h6" style= {{color: "black"}}gutterBottom>
         Class Notes
         </Typography>
-        <Grid container spacing={3}>
+        <Grid className="grid"container spacing={3}>
         <Grid item xs={6} sm={3}>
         <TextField
-            
+            onChange={this.handleDateChange}
             value={this.state.date}
-            onChange={this.handleDateChange.bind(this)}
             type="text"
             id="Date"
             name="Date"
@@ -84,9 +101,8 @@ export default class NoteCreate extends React.Component <acceptedInputs, any>{
         </Grid>
         <Grid item xs={6} sm={3}>
         <TextField
-            required
+       onChange={this.handleInstructorChange}
             value={this.state.instructor}
-            onChange={this.handleInstructorChange.bind(this)}
             type= "text"
             id="Instructor"
             name="Instructor"
@@ -97,9 +113,8 @@ export default class NoteCreate extends React.Component <acceptedInputs, any>{
         </Grid>
         <Grid item xs={6} sm={3}>
         <TextField
-            required
+          onChange={this.handleTechniqueChange}
             value={this.state.technique}
-            onChange={this.handleTechniqueChange.bind(this)}
             type= "text"
             id="Technique"
             name="Technique"
@@ -110,9 +125,8 @@ export default class NoteCreate extends React.Component <acceptedInputs, any>{
         </Grid>
         <Grid item xs={12}>
         <TextField
-            required
+         onChange={this.handleNotesChange}
             value={this.state.notes}
-            onChange={this.handleNotesChange.bind(this)}
             type= "text"
             id="Notes"
             name="Notes"
@@ -121,12 +135,23 @@ export default class NoteCreate extends React.Component <acceptedInputs, any>{
             autoComplete="Notes"
         />
         </Grid>
+        <Grid>
+        <Button type="submit" id = "savenotesbutton" style={{backgroundColor: "#66FCF1"}}>Save</Button>
+        </Grid>
     </Grid>
-    <div id = "buttonparent">
-    <Button type="submit" id = "savenotesbutton" style={{backgroundColor: "#66FCF1"}}>Save</Button>
-    </div>
     </div>
     </form>
+    </div>
         )
     }
 }
+
+
+
+
+
+
+
+
+
+
