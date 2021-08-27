@@ -24,6 +24,7 @@ export default class NoteUpdate extends React.Component <{},acceptedInputs> {
         this.handleTechniqueEdit = this.handleTechniqueEdit.bind(this);
         this.handleNotesEdit = this.handleNotesEdit.bind(this);
     }
+    
     handleDateEdit(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
             editDate: e.target.value
@@ -136,4 +137,38 @@ export default class NoteUpdate extends React.Component <{},acceptedInputs> {
     }
 }
 
-
+// export default class NoteUpdate extends React.Component <{},any> {
+//         constructor(props: any) {
+//             super(props)
+//             this.state = {
+//             sessionToken: localStorage.getItem('token'),
+//             editDate: "",
+//             editInstructor: "",
+//             editTechnique: "",
+//             editNotes: "", 
+//         }
+// }
+//     NoteUpdate = () => {
+//         const date = this.state.editDate;
+//         const instructor= this.state.editInstructor
+//         const technique =this.state.editTechnique
+//         const notes= this.state.editNotes
+//         let url = "http://localhost:3000/notes//update/:id"
+//         fetch(url, {
+//             method: "PUT",
+//             body: JSON.stringify({
+//                 notes: {
+//                     date: date,
+//                     instructor: instructor,
+//                     technique: technique,
+//                     notes: notes
+//                 }
+//             }),
+//             headers: new Headers ({
+//                 "Content-Type": "application/json",
+//                 "Authorization": this.state.sessionToken
+//             }),
+//         })
+//         // .then((res) => this.props.NoteFetcher())
+        
+//     }

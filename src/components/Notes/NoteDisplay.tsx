@@ -1,16 +1,20 @@
 import React from 'react';
 import {Button} from '@material-ui/core'
 import NoteCreate from './NoteCreate';
-import NoteUpdate from './NoteUpdate';
+import {TextField, Grid, Typography, Input} from '@material-ui/core';
 type acceptedInputs = {
     sessionToken: any
     date: string,
     instructor: string,
     technique: string,
     notes: string,
-    allNotes?: any
+    allNotes?: any,
+    editDate: string,
+    editInstructor: string,
+    editTechnique: string,
+    editNotes: string
 }
-export default class NoteDisplay extends React.Component <{},acceptedInputs>{
+export default class NoteDisplay extends React.Component <any,acceptedInputs>{
     constructor(props: any) {
         super(props)
         this.state = {
@@ -19,7 +23,11 @@ export default class NoteDisplay extends React.Component <{},acceptedInputs>{
             instructor: "",
             technique: "",
             notes: "",
-            allNotes: []
+            allNotes: [],
+            editDate: "",
+            editInstructor: "",
+            editTechnique: "",
+            editNotes: "", 
         }
     }
     
@@ -43,14 +51,37 @@ export default class NoteDisplay extends React.Component <{},acceptedInputs>{
     componentDidMount(){
         {this.NoteFetcher(this)}
     }
-
+    // New attempt at PUT
+    NoteUpdate = () => {
+        const date = this.state.editDate;
+        const instructor= this.state.editInstructor
+        const technique =this.state.editTechnique
+        const notes= this.state.editNotes
+        let url = "http://localhost:3000/notes//update/:id"
+        fetch(url, {
+            method: "PUT",
+            body: JSON.stringify({
+                notes: {
+                    date: date,
+                    instructor: instructor,
+                    technique: technique,
+                    notes: notes
+                }
+            }),
+            headers: new Headers ({
+                "Content-Type": "application/json",
+                "Authorization": this.state.sessionToken
+            }),
+        })
+        .then((res) => this.NoteFetcher(this));
+        
+    }
+    //
     render() {
         const allNotes = this.state.allNotes;
         return(
             <div>
                 <NoteCreate />
-                <br />
-                <NoteUpdate />
                 <br />
             <div className="wrapper">
                 {allNotes.map((allNotes:any )=> (
@@ -61,7 +92,8 @@ export default class NoteDisplay extends React.Component <{},acceptedInputs>{
                         <p>Instructor: {allNotes.instructor}</p>
                         <p>Technique: {allNotes.technique}</p>
                         <p><h5>Details:</h5>{allNotes.notes}</p>
-                        <p><Button style={{backgroundColor: "#66FCF1"}}>Delete</Button></p>
+                        <p><Button style={{backgroundColor: "#45A29E"}} >Update</Button></p>
+                        <p><Button style={{color: "white", backgroundColor: "#1F2833"}}>Delete</Button></p>
                         <hr />
                     </tr>
                     </div>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom'
 import {BrowserRouter as Router} from 'react-router-dom';
-import {AppBar, Toolbar, Typography, Container, Button} from "@material-ui/core";
-import NoteDisplay from './NoteDisplay';
+import {AppBar, Typography, Button} from "@material-ui/core";
+import NoteDisplay from './Notes/NoteDisplay';
+import CompPlanDisplay from './Comp Plans/DisplayCompPlan';
+import TrainPlanDisplay from './Training Plans/DisplayTPlans';
 
 export default class NavBar extends React.Component {
     render() {
@@ -26,6 +28,8 @@ export default class NavBar extends React.Component {
             <Button id="logoutbutton" onClick={()=> localStorage.clear()}>LOGOUT </Button>
             </Typography>
             <Route exact path ={'/notedisplay'} component={NoteDisplay} />
+            <Route exact path = {'/comp'} component = {CompPlanDisplay} />
+            <Route exact path ={'/trainingplan'} component={TrainPlanDisplay} />
             </Router>
          
       </AppBar>

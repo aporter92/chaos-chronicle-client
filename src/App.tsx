@@ -3,8 +3,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import UserPage from './components/UserPage';
-import {Button} from '@material-ui/core';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 
 class App extends React.Component <{}, any>  {
