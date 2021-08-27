@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button} from '@material-ui/core'
 import NoteCreate from './NoteCreate';
+import SimpleModal from './TestModal';
+
 import {TextField, Grid, Typography, Input} from '@material-ui/core';
 type acceptedInputs = {
     sessionToken: any
@@ -84,15 +86,15 @@ export default class NoteDisplay extends React.Component <any,acceptedInputs>{
                 <NoteCreate />
                 <br />
             <div className="wrapper">
-                {allNotes.map((allNotes:any )=> (
+                {allNotes.map((allNotes:any, index: number )=> (
                     <div className="mappedresults">
-                    <tr key = {allNotes.id} >
+                    <tr key = {index} >
                         <h5>Date: {allNotes.date}</h5>
                         {/* <p>Date: {allNotes.date}</p> */}
                         <p>Instructor: {allNotes.instructor}</p>
                         <p>Technique: {allNotes.technique}</p>
                         <p><h5>Details:</h5>{allNotes.notes}</p>
-                        <p><Button style={{backgroundColor: "#45A29E"}} >Update</Button></p>
+                        <p><SimpleModal {...this.state} {...index}/></p>
                         <p><Button style={{color: "white", backgroundColor: "#1F2833"}}>Delete</Button></p>
                         <hr />
                     </tr>
