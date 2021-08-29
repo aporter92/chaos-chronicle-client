@@ -49,7 +49,7 @@ type props = {
      editInstructor?: string, 
      editTechnique?: string, 
      editNotes?: string,
-     index?:any 
+     index?:any, 
     }
 
 // const classes = useStyles();
@@ -60,7 +60,6 @@ type props = {
 export default class SimpleModal extends React.Component <props, acceptedInputs> {
     constructor(props: any) {
         super(props)
-        // const arrayObj = this.props.allNotes[0]
         this.state = {
             sessionToken: localStorage.getItem('token'),
             editDate: "",
@@ -75,14 +74,13 @@ export default class SimpleModal extends React.Component <props, acceptedInputs>
         this.handleNotesEdit = this.handleNotesEdit.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        // this.NoteUpdate = this.NoteUpdate.bind(this);
-        this.Fuck = this.Fuck.bind(this);
+        this.Wow = this.Wow.bind(this);
     }
  
-    Fuck () {
-        const allNotes = this.props.allNotes
-        const ID = allNotes[0].id
-        console.log(this.props.index, "index")
+    Wow () {
+      const allNotes = this.props.allNotes
+      const ID = allNotes.id
+        console.log(ID[0], "ID[0]")
     }
 
   handleOpen () {
@@ -114,10 +112,10 @@ handleNotesEdit(e: React.ChangeEvent<HTMLInputElement>){
     })
 }
 
-NoteUpdate = (e:React.FormEvent<HTMLFormElement>) => {
+NoteUpdate = (e:React.FormEvent<HTMLFormElement> ) => {
     e.preventDefault();
     const allNotes = this.props.allNotes
-    const ID = allNotes[0].id
+    const ID = allNotes.id[0]
     const date = this.state.editDate;
     const instructor= this.state.editInstructor
     const technique =this.state.editTechnique
@@ -142,14 +140,13 @@ NoteUpdate = (e:React.FormEvent<HTMLFormElement>) => {
     .then((data) => console.log(data))
     .catch((err) => console.log(err));
 }
-
-
+  
 render() {
   return (
     <div >
-      <button type="button" onClick={this.handleOpen}>
+      <Button type="button" className="notesmodalbutton" style={{backgroundColor: "#45A29E"}} onClick={this.handleOpen}>
         Update
-      </button>
+      </Button>
       <Modal
         open={this.state.open}
         onClose={this.handleClose}
@@ -160,7 +157,7 @@ render() {
         <form onSubmit={this.NoteUpdate}  >
       <h2 id="">Edit Notes</h2>
       <p id="simple-modal-description">
-         
+        
         <Grid item>
             <Input
             onChange={this.handleDateEdit}
@@ -202,7 +199,8 @@ render() {
             autoComplete="notes" />
         </Grid>
         <Button type= "submit" style={{backgroundColor: "#66FCF1"}}>Update</Button>
-        {/* <Button onClick={this.Fuck}>Update</Button> */}
+        
+        <Button onClick={this.Wow}>Update</Button>
         
       </p>
       </form>

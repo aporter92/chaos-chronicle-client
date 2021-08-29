@@ -1,9 +1,38 @@
 import React from 'react';
-import {Button} from '@material-ui/core'
 import NoteCreate from './NoteCreate';
-import SimpleModal from './TestModal';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import {Grid, Input, Button} from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+// import SimpleModal from './TestModal';
 
-import {TextField, Grid, Typography, Input} from '@material-ui/core';
+function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+  
+  function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+  
+      return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+      };
+  }
+  
+  const useStyles = makeStyles((theme: Theme) =>
+      createStyles({
+      paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      },
+    }),
+  );
+
 type acceptedInputs = {
     sessionToken: any
     date: string,
@@ -14,9 +43,23 @@ type acceptedInputs = {
     editDate: string,
     editInstructor: string,
     editTechnique: string,
-    editNotes: string
+    editNotes: string,
+    open: boolean
 }
-export default class NoteDisplay extends React.Component <any,acceptedInputs>{
+type props = {
+    sessionToken?: any, 
+    date?: string, 
+    instructor?: string, 
+    technique?: string, 
+    notes?: string, 
+    allNotes?: any, 
+    editDate?: string,
+    editInstructor?: string, 
+    editTechnique?: string, 
+    editNotes?: string,
+    
+   }
+export default class NoteDisplay extends React.Component <props,acceptedInputs>{
     constructor(props: any) {
         super(props)
         this.state = {
@@ -30,9 +73,44 @@ export default class NoteDisplay extends React.Component <any,acceptedInputs>{
             editInstructor: "",
             editTechnique: "",
             editNotes: "", 
+            open: false,
         }
+        this.handleDateEdit = this.handleDateEdit.bind(this);
+        this.handleInstructorEdit = this.handleInstructorEdit.bind(this);
+        this.handleTechniqueEdit = this.handleTechniqueEdit.bind(this);
+        this.handleNotesEdit = this.handleNotesEdit.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.Wow = this.Wow.bind(this)
     }
+    handleOpen () {
+        this.setState({open: true})
+      };
     
+      handleClose () {
+        this.setState({open: false});
+      };
+    
+      handleDateEdit(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            editDate: e.target.value
+        })
+    }
+    handleInstructorEdit(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            editInstructor: e.target.value
+        })
+    }
+    handleTechniqueEdit(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            editTechnique: e.target.value
+        })
+    }
+    handleNotesEdit(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            editNotes: e.target.value
+        })
+    }
 
     NoteFetcher = (e: any) => {
         let url = "http://localhost:3000/notes/"
@@ -46,20 +124,14 @@ export default class NoteDisplay extends React.Component <any,acceptedInputs>{
         .then(res => res.json())
         .then((data)=>{
             (this.setState({allNotes: data}))
-            // console.log(this.state.allNotes)
         })
     }
-    
-    componentDidMount(){
-        {this.NoteFetcher(this)}
-    }
-    // New attempt at PUT
-    NoteUpdate = () => {
+    NoteUpdate = (noteID: number) => {
         const date = this.state.editDate;
         const instructor= this.state.editInstructor
         const technique =this.state.editTechnique
         const notes= this.state.editNotes
-        let url = "http://localhost:3000/notes//update/:id"
+        let url = `http://localhost:3000/notes/update/${noteID}`
         fetch(url, {
             method: "PUT",
             body: JSON.stringify({
@@ -75,10 +147,35 @@ export default class NoteDisplay extends React.Component <any,acceptedInputs>{
                 "Authorization": this.state.sessionToken
             }),
         })
-        .then((res) => this.NoteFetcher(this));
-        
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
     }
-    //
+    Wow () {
+        const allNotes = this.state.allNotes
+        // const ID = allNotes
+        console.log(allNotes, "allNotes")
+    }
+    // componentDidMount(){
+    //     {this.NoteFetcher(this)}
+    // }
+    deleteNote = (noteID: number) => {
+        const fetch_url = `http://localhost:3000/notes/delete/${noteID}`;
+        fetch(fetch_url, {
+          method: "DELETE",
+          headers: new Headers({
+            "Content-Type": "application/json",
+            Authorization: this.state.sessionToken,
+          }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((err) => {
+          console.error(err);
+        });
+        
+    };
+    
     render() {
         const allNotes = this.state.allNotes;
         return(
@@ -86,22 +183,82 @@ export default class NoteDisplay extends React.Component <any,acceptedInputs>{
                 <NoteCreate />
                 <br />
             <div className="wrapper">
-                {allNotes.map((allNotes:any, index: number )=> (
+                {allNotes.map((note:any, index: number )=> (
                     <div className="mappedresults">
-                    <tr key = {index} >
-                        <h5>Date: {allNotes.date}</h5>
-                        {/* <p>Date: {allNotes.date}</p> */}
-                        <p>Instructor: {allNotes.instructor}</p>
-                        <p>Technique: {allNotes.technique}</p>
-                        <p><h5>Details:</h5>{allNotes.notes}</p>
-                        <p><SimpleModal {...this.state} {...index}/></p>
-                        <p><Button style={{color: "white", backgroundColor: "#1F2833"}}>Delete</Button></p>
+                    <Grid key = {index} >
+                        <h5>Date: {note.date}</h5>
+                        <p><b>Instructor: </b>{note.instructor} <b>Technique:</b> {note.technique}</p>
+                        <p><h5>Details:</h5>{note.notes}</p>
+                        <p><Button type="button" className="notesmodalbutton" style={{backgroundColor: "#45A29E"}} onClick={this.handleOpen}>
+        Update
+      </Button>
+      <Modal
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div className="mappedresults">
+        <form  >
+      <h2 id="">Edit Notes</h2>
+      <p id="simple-modal-description">
+        
+        <Grid item>
+            <Input
+            onChange={this.handleDateEdit}
+            value={this.state.editDate}
+            type="text"
+            id="Date"
+            name="Date"
+            fullWidth
+            autoComplete="todays-date" />
+        </Grid>
+        <Grid item>
+            <Input
+            onChange={this.handleInstructorEdit}
+            value={this.state.editInstructor}
+            type="text"
+            id="instructor"
+            name="instructor"
+            fullWidth
+            autoComplete="instructor" />
+        </Grid>
+        <Grid item>
+            <Input
+            onChange={this.handleTechniqueEdit}
+            value={this.state.editTechnique}
+            type="text"
+            id="technique"
+            name="technique"
+            fullWidth
+            autoComplete="technique" />
+        </Grid>
+        <Grid item>
+            <Input
+            onChange={this.handleNotesEdit}
+            value={this.state.editNotes}
+            type="text"
+            id="notes"
+            name="notes"
+            fullWidth
+            autoComplete="notes" />
+        </Grid>
+        <Button type= "submit" style={{backgroundColor: "#66FCF1"}}>Update</Button>
+        
+        <Button onClick={()=> this.NoteUpdate(note.id)}>Wow</Button>
+        
+      </p>
+      </form>
+    </div>
+      </Modal></p>
+                        {/* <p>id: {note.id}</p> */}
+                        <p><Button onClick={()=> this.deleteNote(note.id)} style={{color: "white", backgroundColor: "#1F2833"}}>Delete</Button></p>
                         <hr />
-                    </tr>
+                    </Grid>
                     </div>
                 ))}
                 
-                {/* <Button type="submit" style={{position: "static", backgroundColor: "#66FCF1"}} onClick={this.NoteFetcher.bind(this)}>Show my Class Notes</Button> */}
+                <Button type="submit" style={{position: "static", backgroundColor: "#66FCF1"}} onClick={this.NoteFetcher.bind(this)}>Show my Class Notes</Button>
             </div>
             
             </div>

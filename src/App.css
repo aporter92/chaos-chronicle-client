@@ -73,3 +73,9 @@ color: black;
 margin-left: 30%;
 padding: 15px;
 }
+
+.notesmodalbutton {
+  border-radius: 10%;
+  border-style:solid;
+  size: 50px;
+}
