@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {Grid, Button, Input} from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 
+// CAN DELETE THIS WHOLE FILE
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 type acceptedInputs = {
-    sessionToken: any, // come back to this - any needs to be more specific
+    sessionToken: any, 
     editDate: string,
     editInstructor: string,
     editTechnique: string,
