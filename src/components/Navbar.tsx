@@ -5,6 +5,7 @@ import {AppBar, Typography, Button} from "@material-ui/core";
 import NoteDisplay from './Notes/NoteDisplay';
 import CompPlanDisplay from './Comp Plans/DisplayCompPlan';
 import TrainPlanDisplay from './Training Plans/DisplayTPlans';
+import VideoDisplay from './Videos/GetVideos'
 
 export default class NavBar extends React.Component {
     render() {
@@ -30,6 +31,7 @@ export default class NavBar extends React.Component {
             <Route exact path ={'/notedisplay'} component={NoteDisplay} />
             <Route exact path = {'/comp'} component = {CompPlanDisplay} />
             <Route exact path ={'/trainingplan'} component={TrainPlanDisplay} />
+            <Route exact path ={'/videos'} component={VideoDisplay} />
             </Router>
          
       </AppBar>
