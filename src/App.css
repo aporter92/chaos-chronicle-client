@@ -52,17 +52,6 @@ padding: 15px;
 /* transform : translate(-50%, -50%);  */
 }
 
-/* #buttonparent {
-  display: table;
-  text-align: center;
-} */
-
-/* #savenotesbutton{
-  display: table-cell;
-  position: absolute;
-  vertical-align: bottom;
-  bottom: 5px;
-} */
 .mappedresults{
   /* might be clashing with material UI grid properties */
 background-color: #C5C6C7;

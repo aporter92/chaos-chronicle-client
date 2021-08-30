@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Input, Button} from '@material-ui/core';
 import YouTubeEmbed from './YouTubeEmbed';
+import VideoUpload from './PostVideos';
 
 type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
@@ -62,7 +63,9 @@ export default class VideoDisplay extends React.Component <props,acceptedInputs>
 render() {
     const allVideos = this.state.allVideos;
     return (
-        <div>   
+        <div>
+            <VideoUpload />
+            <br />   
             <div>
                 {allVideos.map((video:any, index: number )=> (
                     <div className="mappedresults">
