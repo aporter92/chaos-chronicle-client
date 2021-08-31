@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Grid, Input} from '@material-ui/core';
 import CPlanCreate from './CPlanCreate';
 import Modal from '@material-ui/core/Modal';
+import APIURL from '../../helpers/environment';
 
 type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
@@ -91,7 +92,7 @@ export default class CompPlanDisplay extends React.Component <any,acceptedInputs
 
 
     CompPlanFetcher = (e: any) => {
-        let url = "http://localhost:3000/cplan/"
+        let url = `${APIURL}/cplan/`;
         fetch(url, {
             method: "GET",
             headers: new Headers ({
@@ -112,7 +113,7 @@ export default class CompPlanDisplay extends React.Component <any,acceptedInputs
         const whereDoYouLand = this.state.editWhereDoYouLand
         const whatNext = this.state.editWhatNext
         const issues = this.state.editIssues
-        let url = `http://localhost:3000/cplan/update/${planId}`
+        let url = `${APIURL}/cplan/update/${planId}`
         fetch(url, {
             method: "PUT",
             body: JSON.stringify({
@@ -135,7 +136,7 @@ export default class CompPlanDisplay extends React.Component <any,acceptedInputs
         .catch((err) => console.log(err));
     }
     deleteCompPlan = (planId: number) => {
-        const fetch_url = `http://localhost:3000/cplan/delete/${planId}`;
+        const fetch_url = `${APIURL}/cplan/delete/${planId}`;
         fetch(fetch_url, {
           method: "DELETE",
           headers: new Headers({

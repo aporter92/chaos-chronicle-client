@@ -3,6 +3,7 @@ import NoteCreate from './NoteCreate';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {Grid, Input, Button} from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
+import APIURL from '../../helpers/environment';
 
 
 function rand() {
@@ -112,7 +113,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
     }
 
     NoteFetcher = (e: any) => {
-        let url = "http://localhost:3000/notes/"
+        let url = `${APIURL}/notes/`
         fetch(url, {
             method: "GET",
             headers: new Headers ({
@@ -135,7 +136,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
         const instructor= this.state.editInstructor
         const technique =this.state.editTechnique
         const notes= this.state.editNotes
-        let url = `http://localhost:3000/notes/update/${noteID}`
+        let url = `${APIURL}/notes/update/${noteID}`
         fetch(url, {
             method: "PUT",
             body: JSON.stringify({
@@ -157,7 +158,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
     }
    
     deleteNote = (noteID: number) => {
-        const fetch_url = `http://localhost:3000/notes/delete/${noteID}`;
+        const fetch_url = `${APIURL}/notes/delete/${noteID}`;
         fetch(fetch_url, {
           method: "DELETE",
           headers: new Headers({

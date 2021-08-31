@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextField, Grid, Typography, Button} from '@material-ui/core';
+import APIURL from '../../helpers/environment';
 type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
     date: string,
@@ -55,7 +56,7 @@ export default class NoteCreate extends React.Component <{},acceptedInputs>{
         const instructor= this.state.instructor
         const technique =this.state.technique
         const notes= this.state.notes
-        let url = "http://localhost:3000/notes/create" 
+        let url = `${APIURL}/notes/create` 
         fetch(url, {
             method: "POST",
             body: JSON.stringify({

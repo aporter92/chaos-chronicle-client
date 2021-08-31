@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextField, Grid, Typography, Button} from '@material-ui/core';
+import APIURL from '../../helpers/environment';
 type acceptedInputs = {
     sessionToken: any, 
     date: string, 
@@ -67,7 +68,7 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
         const top = this.state.top
         const bottom = this.state.bottom
         const issues = this.state.issues
-        let url = "http://localhost:3000/tplan/create" 
+        let url = `${APIURL}/tplan/create` 
         fetch(url, {
             method: "POST",
             body: JSON.stringify({

@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextField, Grid, Typography, Button} from '@material-ui/core';
+import APIURL from '../../helpers/environment';
 
 type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
@@ -36,7 +37,7 @@ VideoHandler = (e:any) => {
     e.preventDefault();
     const title = this.state.title;
     const link= this.state.link
-    let url = "http://localhost:3000/video/upload" 
+    let url = `${APIURL}/video/upload` 
     fetch(url, {
         method: "POST",
         body: JSON.stringify({

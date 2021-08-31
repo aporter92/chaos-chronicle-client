@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
+import APIURL from '../helpers/environment';
 
 export default class Login extends React.Component <any, any> {
     constructor (props: any) {
@@ -20,7 +21,7 @@ export default class Login extends React.Component <any, any> {
             password: password
         } 
         let url = 
-            "http://localhost:3000/user/login" 
+            `${APIURL}/user/login` 
         await fetch(url, {
             method: "POST",
             body: JSON.stringify(reqBody),
@@ -66,7 +67,7 @@ export default class Login extends React.Component <any, any> {
             admin: admin
         } 
         let url = 
-            "http://localhost:3000/user/register" 
+            `${APIURL}/user/register` 
         await fetch(url, {
             method: "POST",
             body: JSON.stringify(reqBody),

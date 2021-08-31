@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from '@material-ui/core';
 import YouTubeEmbed from './YouTubeEmbed';
 import VideoUpload from './PostVideos';
+import APIURL from '../../helpers/environment';
 
 type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
@@ -25,7 +26,7 @@ export default class VideoDisplay extends React.Component <props,acceptedInputs>
         }
     }
     VideoFetcher = (e: any) => {
-        let url = "http://localhost:3000/video/"
+        let url = `${APIURL}/video/`
         fetch(url, {
             method: "GET",
             headers: new Headers ({
@@ -44,7 +45,7 @@ export default class VideoDisplay extends React.Component <props,acceptedInputs>
     }
 
     deleteVideo = (vidID: number) => {
-        const fetch_url = `http://localhost:3000/video/delete/${vidID}`;
+        const fetch_url = `${APIURL}/video/delete/${vidID}`;
         fetch(fetch_url, {
           method: "DELETE",
           headers: new Headers({

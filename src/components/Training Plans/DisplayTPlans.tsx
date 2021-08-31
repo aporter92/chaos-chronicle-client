@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import {Grid, Input,Button} from '@material-ui/core';
 import TPlanCreate from './TPlanCreate';
+import APIURL from '../../helpers/environment';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -110,7 +111,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
     }
 
     TrainingPlanFetcher = (e: any) => {
-        let url = "http://localhost:3000/tplan/"
+        let url = `${APIURL}/tplan/`
         fetch(url, {
             method: "GET",
             headers: new Headers ({
@@ -130,7 +131,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
         const top = this.state.editTop
         const bottom = this.state.editBottom
         const issues = this.state.editIssues
-        let url = `http://localhost:3000/tplan/update/${noteID}`
+        let url = `${APIURL}/tplan/update/${noteID}`
         fetch(url, {
             method: "PUT",
             body: JSON.stringify({
@@ -156,7 +157,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
         {this.TrainingPlanFetcher(this)}
     }
     deleteTrainingPlan = (noteID: number) => {
-        const fetch_url = `http://localhost:3000/tplan/delete/${noteID}`;
+        const fetch_url = `${APIURL}/tplan/delete/${noteID}`;
         fetch(fetch_url, {
           method: "DELETE",
           headers: new Headers({

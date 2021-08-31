@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextField, Grid, Typography, Button} from '@material-ui/core';
+import APIURL from '../../helpers/environment';
 
 type acceptedInputs = {
     sessionToken: any, 
@@ -78,7 +79,7 @@ export default class CPlanCreate extends React.Component <{},acceptedInputs>{
         const whereDoYouLand = this.state.whereDoYouLand
         const whatNext = this.state.whatNext
         const issues = this.state.issues
-        let url = "http://localhost:3000/cplan/create" 
+        let url = `${APIURL}/cplan/create` 
         fetch(url, {
             method: "POST",
             body: JSON.stringify({
