@@ -6,23 +6,19 @@ import NoteDisplay from './Notes/NoteDisplay';
 import CompPlanDisplay from './Comp Plans/DisplayCompPlan';
 import TrainPlanDisplay from './Training Plans/DisplayTPlans';
 import VideoDisplay from './Videos/GetVideos'
-import HomePage from './HomePage';
 import BJJ from '../assets/BJJ.png';
 
 export default class NavBar extends React.Component {
     render() {
     return (
-      <AppBar position="static" className = "navbarguy" style= {{background: "#0B0C10"}}>
+      <AppBar position="static" className = "navbarguy" style= {{background: "transparent"}}>
         <Link className= "img" to="/">
               <img alt="logo" src={BJJ} height="100px" />
             </Link>
+            <p className="navwebname"><u>CHAOS CHRONICLE</u></p> 
             <Router>
               <div className="navbaritems">
             <Typography variant="h6" >
-            
-              <Button >
-              <Link to ="/home" id ="navlink" style={{float: "right",color: "#66FCF1"}}>Home</Link>
-              </Button>
               <Button>
               <Link to ="/notedisplay" id="navlink" style={{color: "#66FCF1"}}>Class Notes</Link>
             </Button>
@@ -41,14 +37,12 @@ export default class NavBar extends React.Component {
             <br />
             <br />
             <br />
-            <Route exact path ={'/home'} component={HomePage} />
             <Route exact path ={'/notedisplay'} component={NoteDisplay} />
             <Route exact path = {'/comp'} component = {CompPlanDisplay} />
             <Route exact path ={'/trainingplan'} component={TrainPlanDisplay} />
             <Route exact path ={'/videos'} component={VideoDisplay} />
             
             </Router>
-         
       </AppBar>
     );
   }

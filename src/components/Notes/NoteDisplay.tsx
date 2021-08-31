@@ -196,12 +196,13 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                         >
-                        <div className="mappedresults">
+                        <div className="modal">
                         <form  >
                         <h2 id="">Edit Notes</h2>
                         <p id="simple-modal-description">
         
                         <Grid item>
+                        <h5>Date:</h5>
                         <Input
                         onChange={this.handleDateEdit}
                         value={this.state.editDate}
@@ -212,6 +213,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
                         autoComplete="todays-date" />
                         </Grid>
                         <Grid item>
+                        <h5>Instructor:</h5>
                         <Input
                         onChange={this.handleInstructorEdit}
                         value={this.state.editInstructor}
@@ -222,6 +224,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
                         autoComplete="instructor" />
                         </Grid>
                         <Grid item>
+                        <h5>Technique:</h5>
                         <Input
                         onChange={this.handleTechniqueEdit}
                         value={this.state.editTechnique}
@@ -232,6 +235,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
                         autoComplete="technique" />
                         </Grid>
                         <Grid item>
+                        <h5>Notes:</h5>
                         <Input
                         onChange={this.handleNotesEdit}
                         value={this.state.editNotes}

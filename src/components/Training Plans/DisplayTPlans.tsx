@@ -198,12 +198,13 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                         >
-                        <div className="mappedresults">
+                        <div className="modal">
                         <form >
                         <h2 id="">Edit Plan</h2>
                         <p id="simple-modal-description">
         
                         <Grid item>
+                        <h5>Date:</h5>
                         <Input
                         onChange={this.handleDateEdit}
                         value={this.state.editDate}
@@ -214,6 +215,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
                         autoComplete="todays-date" />
                         </Grid>
                         <Grid item>
+                        <h5>Stand Up Goal:</h5>
                         <Input
                         onChange={this.handleStandUpEdit}
                         value={this.state.editStandUpGoals}
@@ -224,6 +226,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
                         autoComplete="standUp" />
                         </Grid>
                         <Grid item>
+                        <h5>Top Goal:</h5>
                         <Input
                         onChange={this.handleTopEdit}
                         value={this.state.editTop}
@@ -234,6 +237,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
                         autoComplete="top" />
                         </Grid>
                         <Grid item>
+                        <h5>Bottom Goal:</h5>
                         <Input
                         onChange={this.handleBottomEdit}
                         value={this.state.editBottom}
@@ -244,6 +248,7 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
                         autoComplete="bottom" />
                         </Grid>
                         <Grid item>
+                        <h5>Issues:</h5>
                         <Input
                         onChange={this.handleIssuesEdit}
                         value={this.state.editIssues}
@@ -254,9 +259,6 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
                         autoComplete="issues" />
                         </Grid>
                         <Button type= "submit" onClick={()=> this.TrainingPlanUpdate(plan.id)} style={{backgroundColor: "#66FCF1"}}>Update</Button>
-        
-        {/* <Button onClick={()=> this.TrainingPlanUpdate(plan.id)}>Update</Button> */}
-        
                         </p>
                         </form>
                         </div>
