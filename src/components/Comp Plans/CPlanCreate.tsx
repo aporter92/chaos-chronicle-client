@@ -1,59 +1,69 @@
 import React from 'react';
 import {TextField, Grid, Typography, Button} from '@material-ui/core';
+
 type acceptedInputs = {
     sessionToken: any, 
     date: string, 
+    overridingGoal: string,
     standUpGoals: string,
-    top: string,
-    bottom: string,
+    whereDoYouLand:string,
+    whatNext: string,
     issues: string,
-    allTrainPlans: any,
+    allCompPlans: any,
 }
-export default class TPlanCreate extends React.Component <{},acceptedInputs>{
+
+export default class CPlanCreate extends React.Component <{},acceptedInputs>{
     constructor(props: any) {
         super(props)
         this.state = {
-           sessionToken: localStorage.getItem('token'),
-            date: "",
-            standUpGoals: "",
-            top: "",
-            bottom:"",
-            issues: "",
-            allTrainPlans:[],
+            sessionToken: localStorage.getItem('token'),
+            date: "", 
+            overridingGoal:"",
+            standUpGoals:"",
+            whereDoYouLand:"",
+            whatNext:"",
+            issues:"",
+            allCompPlans:[],
         }
 
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleStandUpChange = this.handleStandUpChange.bind(this);
-        this.handleTopChange = this.handleTopChange.bind(this);
-        this.handleBottomChange = this.handleBottomChange.bind(this);
-        this.handleIssuesChange = this.handleIssuesChange.bind(this);
+        this.handleDate = this.handleDate.bind(this);
+        this.handleOverridingGoal = this.handleOverridingGoal.bind(this);
+        this.handleStandUp = this.handleStandUp.bind(this);
+        this.handleWhereDoYouLand = this.handleWhereDoYouLand.bind(this);
+        this.handleWhatNext = this.handleWhatNext.bind(this);
+        this.handleIssues = this.handleIssues.bind(this);
     }
-
-    handleDateChange(e: React.ChangeEvent<HTMLInputElement>){
+    handleDate(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
             date: e.target.value
         })
         console.log(this.state.date)
     }
-    handleStandUpChange(e: React.ChangeEvent<HTMLInputElement>){
+    handleOverridingGoal(e: React.ChangeEvent<HTMLInputElement>){
+        this.setState({
+            overridingGoal: e.target.value
+        })
+        console.log(this.state.overridingGoal)
+    }
+    handleStandUp(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
             standUpGoals: e.target.value
         })
         console.log(this.state.standUpGoals)
     }
-    handleTopChange(e: React.ChangeEvent<HTMLInputElement>){
+    handleWhereDoYouLand(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
-            top: e.target.value
+            whereDoYouLand: e.target.value
         })
-        console.log(this.state.top)
+        console.log(this.state.whereDoYouLand)
     }
-    handleBottomChange(e: React.ChangeEvent<HTMLInputElement>){
+    handleWhatNext(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
-            bottom: e.target.value
+            whatNext: e.target.value
         })
-        console.log(this.state.bottom)
+        console.log(this.state.whatNext)
     }
-    handleIssuesChange(e: React.ChangeEvent<HTMLInputElement>){
+    handleIssues(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
             issues: e.target.value
         })
@@ -63,19 +73,21 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
     PlanHandler = (e: any) => {
         e.preventDefault();
         const date = this.state.date;
+        const overridingGoal = this.state.overridingGoal
         const standUpGoals = this.state.standUpGoals
-        const top = this.state.top
-        const bottom = this.state.bottom
+        const whereDoYouLand = this.state.whereDoYouLand
+        const whatNext = this.state.whatNext
         const issues = this.state.issues
-        let url = "http://localhost:3000/tplan/create" 
+        let url = "http://localhost:3000/cplan/create" 
         fetch(url, {
             method: "POST",
             body: JSON.stringify({
-                tplan: {
+                cplan: {
                     date: date,
+                    overridingGoal: overridingGoal,
                     standUpGoals: standUpGoals,
-                    top: top,
-                    bottom: bottom,
+                    whereDoYouLand: whereDoYouLand,
+                    whatNext: whatNext,
                     issues: issues
                 }
             }),
@@ -91,18 +103,19 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
         )
         .catch((err) => console.log(err));
     }
+
     render() {
         return(
             <div className = "newDiv">
             <form onSubmit={this.PlanHandler}>
             <div className = "notesform" text-align="center">
             <Typography variant="h6" style= {{color: "black"}}gutterBottom>
-        Make a New Training Plan
+        Make a New Competition Plan
         </Typography>
         <Grid className="grid"container spacing={3}>
         <Grid item xs={6} sm={3}>
         <TextField
-            onChange={this.handleDateChange}
+            onChange={this.handleDate}
             value={this.state.date}
             type="text"
             id="Date"
@@ -114,7 +127,19 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
         </Grid>
         <Grid item xs={12}>
         <TextField
-       onChange={this.handleStandUpChange}
+       onChange={this.handleOverridingGoal}
+            value={this.state.overridingGoal}
+            type= "text"
+            id="overriding goal"
+            name="overriding goal"
+            label="overriding goal"
+            fullWidth
+            autoComplete="overriding goal"
+        />
+        </Grid>
+        <Grid item xs={12}>
+        <TextField
+       onChange={this.handleStandUp}
             value={this.state.standUpGoals}
             type= "text"
             id="standUpGoals"
@@ -126,31 +151,31 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
         </Grid>
         <Grid item xs={12}>
         <TextField
-          onChange={this.handleTopChange}
-            value={this.state.top}
+          onChange={this.handleWhereDoYouLand}
+            value={this.state.whereDoYouLand}
             type= "text"
-            id="top"
-            name="top"
-            label="top"
+            id="whereDoYouLand"
+            name="whereDoYouLand"
+            label="whereDoYouLand"
             fullWidth
-            autoComplete="top"
+            autoComplete="whereDoYouLand"
         />
         </Grid>
         <Grid item xs={12}>
         <TextField
-         onChange={this.handleBottomChange}
-            value={this.state.bottom}
+         onChange={this.handleWhatNext}
+            value={this.state.whatNext}
             type= "text"
-            id="bottom"
-            name="bottom"
-            label="bottom"
+            id="whatNext"
+            name="whatNext"
+            label="whatNext"
             fullWidth
-            autoComplete="bottom"
+            autoComplete="whatNext"
         />
         </Grid>
         <Grid item xs={12}>
         <TextField
-         onChange={this.handleIssuesChange}
+         onChange={this.handleIssues}
             value={this.state.issues}
             type= "text"
             id="issues"
@@ -161,7 +186,7 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
         />
         </Grid>
         <Grid>
-        <Button type="submit" id = "savetplanbutton" style={{backgroundColor: "#C5C6C7"}}>Save</Button>
+        <Button type="submit" id = "saveplanbutton" style={{backgroundColor: "#C5C6C7"}}>Save</Button>
         </Grid>
     </Grid>
     </div>
@@ -169,14 +194,5 @@ export default class TPlanCreate extends React.Component <{},acceptedInputs>{
     </div>
         )
     }
+
 }
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from '@material-ui/core'
+import {Button} from '@material-ui/core';
 
 export default class Login extends React.Component <any, any> {
     constructor (props: any) {
@@ -34,6 +34,7 @@ export default class Login extends React.Component <any, any> {
             alert(json.message)
             // localStorage.setItem("token", json.token)
             // this.props.updateLocalStorage(json.token)
+            
         })
         .catch(err => console.log(err))
     }
@@ -83,10 +84,10 @@ export default class Login extends React.Component <any, any> {
 
     render() {
         return(
-            <div id = "registerlogin">
+            <div className = "registerlogin">
                 {this.state.signingUp ? (
           <div>
-            <form
+            <form className= "logincontainer"
               action="#"
               onSubmit={this.signupHandler.bind(this)}
               style={{ fontWeight: 600 }}
@@ -95,9 +96,11 @@ export default class Login extends React.Component <any, any> {
               <br />
               <input type="text" name="firstName" />
               <br />
+              <br />
               <label htmlFor="email">Email</label>
               <br />
               <input type="email" name="email" />
+              <br />
               <br />
               <label htmlFor="password">Password</label>
               <br />
@@ -107,8 +110,9 @@ export default class Login extends React.Component <any, any> {
               <Button id ="signupbutton" type = "submit">Submit</Button>
               < br />
               <br />
-              <Button size= "small" id ="signupbutton" onClick={this.loginToggle.bind(this)}>Back to Log In</Button>
+              <Button size= "small" id ="signupbutton" onClick={this.loginToggle.bind(this)}>Log In</Button>
             </form>
+            
           </div>
         ) : (
           <div>
@@ -121,15 +125,18 @@ export default class Login extends React.Component <any, any> {
               <br />
               <input type="email" name="email" />
               <br />
+              <br />
               <label htmlFor="password">Password</label>
               <br />
               <input type="password" name="password" />
               <br />
               <br />
               <Button id="loginbutton" type = "submit">Log in</Button>
-            </form>
-            <p id = "signupq">Don't have an account?</p>
+              <p></p>
+              {/* <p className= "signupinfo">Don't have an account?</p> */}
             <Button id ="signupbutton" onClick={this.startSignUp.bind(this)}>Sign up</Button>
+            </form>
+            
           </div>
         )}
             </div>

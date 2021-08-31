@@ -179,6 +179,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
             <div>
                 <NoteCreate />
                 <br />
+                <br />
             <div className="wrapper">
                 {allNotes.map((note:any, index: number )=> (
                     <div className="mappedresults">
@@ -186,7 +187,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
                         <h5>Date: {note.date}</h5>
                         <p><b>Instructor: </b>{note.instructor} <b>Technique:</b> {note.technique}</p>
                         <p><h5>Details:</h5>{note.notes}</p>
-                        <p><Button type="button" className="notesmodalbutton" style={{backgroundColor: "#45A29E"}} onClick={this.handleOpen}>
+                        <p><Button type="button" className="notesmodalbutton" style={{backgroundColor: "#C5C6C7"}} onClick={this.handleOpen}>
                         Update
                         </Button>
                         <Modal

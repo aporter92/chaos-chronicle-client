@@ -6,9 +6,11 @@ export default class UserPage extends React.Component{
     render() {
         return(
             <div>
+            <div>
             <Link to = "/user">
             </Link>
             <Navbar />
+            </div>
             </div>
         )
     }

@@ -65,6 +65,7 @@ render() {
     return (
         <div>
             <VideoUpload />
+            <br />
             <br />   
             <div>
                 {allVideos.map((video:any, index: number )=> (

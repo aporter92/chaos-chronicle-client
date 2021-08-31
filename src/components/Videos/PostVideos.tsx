@@ -94,7 +94,7 @@ render() {
         
         <Grid item xs={9} sm={3}>
         <br />
-        <Button id = "uploadbutton" onClick={this.VideoHandler} style={{backgroundColor: "#66FCF1"}}>Upload</Button>
+        <Button id = "uploadbutton" onClick={this.VideoHandler} style={{backgroundColor: "#C5C6C7"}}>Upload</Button>
         </Grid>
     </Grid>
             </div>

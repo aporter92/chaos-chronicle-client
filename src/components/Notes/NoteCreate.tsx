@@ -136,7 +136,7 @@ export default class NoteCreate extends React.Component <{},acceptedInputs>{
         />
         </Grid>
         <Grid>
-        <Button type="submit" id = "savenotesbutton" style={{backgroundColor: "#66FCF1"}}>Save</Button>
+        <Button type="submit" id = "savenotesbutton" style={{backgroundColor: "#C5C6C7"}}>Save</Button>
         </Grid>
     </Grid>
     </div>

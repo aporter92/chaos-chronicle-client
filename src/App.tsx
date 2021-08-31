@@ -2,48 +2,37 @@ import React from 'react';
 import './App.css';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import bjj from '../src/assets/bjj.jpeg';
 import UserPage from './components/UserPage';
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 
+type acceptedInputs = {
+  sessionToken: any, 
+}
 
-class App extends React.Component <{}, any>  {
+class App extends React.Component <any, acceptedInputs>  {
   constructor(props: any) {
     super(props);
     this.state = {
-      sessionToken: undefined
+      sessionToken: localStorage.getItem('token')
     }
   }
 
-
   render() {
-  return (
-    <div className="App">
-      <div>  
-      <Router>
-      <ul className="menu">
-            <Link to="/"style={{color: "white"}}>Login</Link>
-            <br />
-            <Link to="/user"style={{color: "white"}}>User Page</Link>
-        </ul>
-          <Route exact path ={'/user'} component={UserPage} />
-          <Route exact path ={'/'} component={Login} />
-          <Route exact path={'/'} component ={Footer} />
-          
+    return ( 
+      <div>
+        <div style={{ backgroundImage: `url(${bjj})` }}className="App">
+        <Router>
+      { //Check token
+        (this.state.sessionToken === null)
+          ? <div> <Login /> <Footer /></div> 
+          : <div> <UserPage /> </div> 
+      }
       </Router>
-      
-      {/* <Router>
-        <UserPage />
-      </Router>
-      {this.state.sessionToken === undefined && (
-        <Login />
-      )}
-      <Footer /> */}
       </div>
     </div>
-    
-    
-  );
-}
+    ) 
+  }
 }
 
 export default App;

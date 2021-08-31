@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import {TextField, Grid, Input, Typography, Button} from '@material-ui/core';
+import {Grid, Input,Button} from '@material-ui/core';
 import TPlanCreate from './TPlanCreate';
 
 function rand() {
@@ -178,17 +178,18 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
             <div>
                 <TPlanCreate />
                 <br />
+                <br />
                 <div>
                     {allPlans.map((plan:any, index: number )=>(
                     <div className="mappedresults">
                         <tr key = {index} >
-                        <h4>October </h4>
+                        <h4>September </h4>
                         <p><b>Date: </b>{plan.date}</p>
                         <p><b>Stand Up: </b>{plan.standUpGoals}</p>
                         <p><b>Goal on top:</b> {plan.top}</p>
                         <p><b>Goal on Bottom:</b> {plan.bottom}</p>
                         <p><h4>What Issues are you encountering? </h4>{plan.issues}</p>
-                        <p><Button type="button" className="notesmodalbutton" style={{backgroundColor: "#45A29E"}} onClick={this.handleOpen}>
+                        <p><Button type="button" className="notesmodalbutton" style={{backgroundColor: "#C5C6C7"}} onClick={this.handleOpen}>
                             Update
                         </Button>
                         <Modal

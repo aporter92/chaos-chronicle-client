@@ -1,5 +1,7 @@
 import React from 'react';
-import {TextField, Grid, Typography, Button} from '@material-ui/core';
+import {Button} from '@material-ui/core';
+import CPlanCreate from './CPlanCreate';
+import Modal from '@material-ui/core/Modal';
 
 type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
@@ -51,18 +53,21 @@ export default class CompPlanDisplay extends React.Component <any,acceptedInputs
         const allPlans = this.state.allPlans;
         return(
             <div>
+                <CPlanCreate />
+                <br />
+                <br />
                 <div>
                     {allPlans.map((allPlans: any)=>(
                     <div className="mappedresults">
                         <tr key = {allPlans.id} >
                         <h5>Pan Americans: September 3</h5>
-                        <p>Date: {allPlans.date}</p>
-                        <p>Overriding Goal: {allPlans.overridingGoal}</p>
-                        <p>Stand Up: {allPlans.standUpGoals}</p>
-                        <p>Where do you land? {allPlans.whereDoYouLand}</p>
-                        <p>What Next? {allPlans.whatNext}</p>
-                        <p>What issues are you encountering? {allPlans.issues}</p>
-                        <p><Button style={{backgroundColor: "#45A29E"}} >Update</Button></p>
+                        <p><b>Date: </b>{allPlans.date}</p>
+                        <p><b>Overriding Goal: </b>{allPlans.overridingGoal}</p>
+                        <p><b>Stand Up: </b> {allPlans.standUpGoals}</p>
+                        <p><b>Where do you land?</b> {allPlans.whereDoYouLand}</p>
+                        <p><b>What Next?</b> {allPlans.whatNext}</p>
+                        <p><b>What issues are you encountering? </b>{allPlans.issues}</p>
+                        <p><Button style={{backgroundColor: "#C5C6C7"}} >Update</Button></p>
                         <p><Button style={{color: "white", backgroundColor: "#1F2833"}}>Delete</Button></p>
                         < hr />
                         </tr>
