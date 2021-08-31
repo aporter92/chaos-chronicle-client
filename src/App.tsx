@@ -7,14 +7,14 @@ import UserPage from './components/UserPage';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
 type acceptedInputs = {
-  sessionToken: any, 
+  sessionToken: any,
 }
 
 class App extends React.Component <any, acceptedInputs>  {
   constructor(props: any) {
     super(props);
     this.state = {
-      sessionToken: localStorage.getItem('token')
+      sessionToken: localStorage.getItem('token'),
     }
   }
 
