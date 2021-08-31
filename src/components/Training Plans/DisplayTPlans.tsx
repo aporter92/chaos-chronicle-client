@@ -46,7 +46,8 @@ type acceptedInputs = {
     editTop: string,
     editBottom: string,
     editIssues: string,
-    open: boolean
+    open: boolean,
+    interval?:any
 }
 
 
@@ -66,7 +67,8 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
             editTop: "",
             editBottom: "",
             editIssues: "", 
-            open: false 
+            open: false,
+            interval: 0 
         }
         this.handleDateEdit = this.handleDateEdit.bind(this);
         this.handleStandUpEdit = this.handleStandUpEdit.bind(this);
@@ -155,7 +157,12 @@ export default class TrainPlanDisplay extends React.Component <any,acceptedInput
 
     componentDidMount(){
         {this.TrainingPlanFetcher(this)}
+        this.setState({interval: setInterval(this.TrainingPlanFetcher, 8000)})
     }
+    componentWillUnmount() {
+        clearInterval(this.state.interval)
+    }
+
     deleteTrainingPlan = (noteID: number) => {
         const fetch_url = `${APIURL}/tplan/delete/${noteID}`;
         fetch(fetch_url, {

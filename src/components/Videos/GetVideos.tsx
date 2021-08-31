@@ -8,12 +8,14 @@ type acceptedInputs = {
     sessionToken: any, // come back to this - any needs to be more specific
     title: string,
     link: string,
-    allVideos: any
+    allVideos: any,
+    interval?:any
 }
 type props = {
     sessionToken?: any, 
     date?: string, 
-    allPlans?: any, 
+    allPlans?: any,
+    interval?: any 
    }
 export default class VideoDisplay extends React.Component <props,acceptedInputs> {
     constructor(props: any) {
@@ -22,7 +24,8 @@ export default class VideoDisplay extends React.Component <props,acceptedInputs>
             sessionToken: localStorage.getItem('token'),
             title: "",
             link: "",
-            allVideos:[] 
+            allVideos:[],
+            interval: 0 
         }
     }
     VideoFetcher = (e: any) => {
@@ -42,6 +45,11 @@ export default class VideoDisplay extends React.Component <props,acceptedInputs>
 
     componentDidMount(){
         {this.VideoFetcher(this)}
+        this.setState({interval: setInterval(this.VideoFetcher, 8000)})
+    }
+    
+    componentWillUnmount() {
+        clearInterval(this.state.interval)
     }
 
     deleteVideo = (vidID: number) => {

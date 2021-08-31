@@ -20,6 +20,7 @@ type acceptedInputs = {
     editWhereDoYouLand: string,
     editWhatNext: string,
     editIssues: string,
+    interval?:any
 }
 
 export default class CompPlanDisplay extends React.Component <any,acceptedInputs> {
@@ -40,7 +41,8 @@ export default class CompPlanDisplay extends React.Component <any,acceptedInputs
             editWhereDoYouLand: "",
             editWhatNext: "",
             editIssues: "",
-            open: false  
+            open: false,
+            interval: 0  
         }
         this.handleDateEdit = this.handleDateEdit.bind(this);
         this.handleOverridingGoalEdit = this.handleOverridingGoalEdit.bind(this);
@@ -155,6 +157,11 @@ export default class CompPlanDisplay extends React.Component <any,acceptedInputs
 
     componentDidMount(){
         {this.CompPlanFetcher(this)}
+        this.setState({interval: setInterval(this.CompPlanFetcher, 8000)})
+    }
+    
+    componentWillUnmount() {
+        clearInterval(this.state.interval)
     }
 
     render(){

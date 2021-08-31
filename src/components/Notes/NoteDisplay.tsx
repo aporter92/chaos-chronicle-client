@@ -45,7 +45,8 @@ type acceptedInputs = {
     editInstructor: string,
     editTechnique: string,
     editNotes: string,
-    open: boolean
+    open: boolean,
+    interval?: any
 }
 type props = {
     sessionToken?: any, 
@@ -58,6 +59,8 @@ type props = {
     editInstructor?: string, 
     editTechnique?: string, 
     editNotes?: string,
+    interval?: any
+    
     
    }
 export default class NoteDisplay extends React.Component <props,acceptedInputs>{
@@ -75,6 +78,7 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
             editTechnique: "",
             editNotes: "", 
             open: false,
+            interval: 0
         }
         this.handleDateEdit = this.handleDateEdit.bind(this);
         this.handleInstructorEdit = this.handleInstructorEdit.bind(this);
@@ -129,6 +133,11 @@ export default class NoteDisplay extends React.Component <props,acceptedInputs>{
     
     componentDidMount(){
         {this.NoteFetcher(this)}
+        this.setState({interval: setInterval(this.NoteFetcher, 8000)}) 
+        // setInterval(this.NoteFetcher, 8000)
+    }
+    componentWillUnmount() {
+        clearInterval(this.state.interval)
     }
 
     NoteUpdate = (noteID: number) => {
