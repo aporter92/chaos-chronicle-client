@@ -1,4 +1,4 @@
-Jiu Jitsu Journal App to track progress, keep detailed notes on technique, build game plans, and upload videos
+This project is a an app meant to be used as a journal for the sport of Jiu Jitsu. You can use it to track progress, keep detailed notes on technique, build game plans, and upload videos.
 
 # Getting Started with Create React App
 
